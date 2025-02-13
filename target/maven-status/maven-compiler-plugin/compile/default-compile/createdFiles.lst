@@ -3,4 +3,6 @@ com\example\calendarapi\repository\EventRepository.class
 com\example\calendarapi\model\Event.class
 com\example\calendarapi\config\SecurityConfig.class
 com\example\calendarapi\config\SwaggerConfig.class
+com\example\calendarapi\service\EventServiceImpl.class
 com\example\calendarapi\CalendarApiApplication.class
+com\example\calendarapi\service\EventService.class
