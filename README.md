@@ -15,13 +15,9 @@ cd clush-backend
 2-2. 
 1) MySQL 실행
 2) CREATE DATABASE calendar_db;
-3) application.properties 파일 (하기 내용 수정)
-spring.datasource.url=jdbc:mysql://localhost:3306/calendar_db
-spring.datasource.username=root
-spring.datasource.password=your_password
-4) mvn clean install
-5) mvn spring-boot:run
-6) http://localhost:8080/swagger-ui/index.html
+3) mvn clean install
+4) mvn spring-boot:run
+5) http://localhost:8080/swagger-ui/index.html
 
 --------------------------------------------------------------------------------------------------
 
