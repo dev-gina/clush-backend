@@ -11,7 +11,7 @@ public class SwaggerConfig {
     public GroupedOpenApi publicApi() {
         return GroupedOpenApi.builder()
                 .group("public")
-                .pathsToMatch("/api/public/**")  // 공개 API 경로 설정
+                .pathsToMatch("/api/public/**", "/api/events/**") 
                 .build();
     }
 
@@ -19,7 +19,7 @@ public class SwaggerConfig {
     public GroupedOpenApi secureApi() {
         return GroupedOpenApi.builder()
                 .group("secure")
-                .pathsToMatch("/api/secure/**")  // 보안 API 경로 설정
+                .pathsToMatch("/api/secure/**")
                 .build();
     }
 }
