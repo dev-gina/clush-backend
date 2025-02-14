@@ -9,15 +9,39 @@ Swagger UI를 통해 자동으로 생성하여 쉽게 API를 테스트하고 사
 
 2. 소스 빌드 및 실행 방법 메뉴얼 (DB 스키마 및 기초데이터 백업파일 필수)
 
-2-1. git clone https://github.com/dev-gina/clush-backend.git
+2-1. 
+git clone https://github.com/dev-gina/clush-backend.git
 cd clush-backend
 
 2-2. 
-1) MySQL 실행
-2) CREATE DATABASE calendar_db;
-3) mvn clean install
-4) mvn spring-boot:run
-5) http://localhost:8080/swagger-ui/index.html
+1) mvn clean install
+2) mvn spring-boot:run
+3) http://localhost:8080/swagger-ui/index.html
+4) MySQL 접속 및 데이터 확인
+- mysql -u root -p / password : 1234
+- USE calendar_db;
+- SELECT * FROM event;
+- SHOW TABLES;
+
+2.3 DB 스키마
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| calendar_db        |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+mysql> SELECT * FROM event;
++----+-------------+----------------------------+----------------------------+--------+
+| id | description | end_time                   | start_time                 | title  |
++----+-------------+----------------------------+----------------------------+--------+
+|  2 | string      | 2025-02-14 06:56:20.934000 | 2025-02-14 06:56:20.934000 | string |
++----+-------------+----------------------------+----------------------------+--------+
+1 row in set (0.00 sec)
 
 --------------------------------------------------------------------------------------------------
 
