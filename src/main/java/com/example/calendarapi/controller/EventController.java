@@ -28,8 +28,12 @@ public class EventController {
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event savedEvent = eventService.createEvent(event);
-        return ResponseEntity.status(201).body(savedEvent);
+        if (savedEvent != null && savedEvent.getId() != null) {
+            return ResponseEntity.status(201).body(savedEvent);
+        }
+        return ResponseEntity.status(500).body(null);
     }
+
 
     // 이벤트 수정하기
     @PutMapping("/{id}")
