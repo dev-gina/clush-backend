@@ -14,7 +14,7 @@ mvn clean install
 mvn spring-boot:run
 
 MySQL 데이터베이스 확인 (bash)
-mysql -u root -p   # 비밀번호 입력 (1234)
+mysql -u root -p   # 비밀번호 입력 (12345)
 USE calendar_db;
 SHOW TABLES;
 SELECT * FROM event;
