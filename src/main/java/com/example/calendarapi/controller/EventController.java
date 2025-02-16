@@ -22,36 +22,27 @@ public class EventController {
     @GetMapping
     public ResponseEntity<List<Event>> getAllEvents() {
         List<Event> events = eventService.getAllEvents();
-        return ResponseEntity.ok(events); 
+        return ResponseEntity.ok(events);
     }
 
     // 새로운 이벤트 추가하기
-    @PostMapping(value = "/events", consumes = "application/json;charset=UTF-8", produces = "application/json;charset=UTF-8")
+    @PostMapping // 🔥 "/events" 삭제
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event savedEvent = eventService.createEvent(event);
-        if (savedEvent != null && savedEvent.getId() != null) {
-            return ResponseEntity.status(201).body(savedEvent); 
-        }
-        return ResponseEntity.status(500).body(null);
+        return ResponseEntity.status(201).body(savedEvent);
     }
 
     // 이벤트 수정하기
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event eventDetails) {
         Event updatedEvent = eventService.updateEvent(id, eventDetails);
-        if (updatedEvent != null) {
-            return ResponseEntity.ok(updatedEvent); 
-        }
-        return ResponseEntity.status(404).build(); 
+        return ResponseEntity.ok(updatedEvent);
     }
 
     // 이벤트 삭제하기
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
-        boolean isDeleted = eventService.deleteEvent(id);
-        if (isDeleted) {
-            return ResponseEntity.noContent().build(); 
-        }
-        return ResponseEntity.status(404).build(); 
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
     }
 }
