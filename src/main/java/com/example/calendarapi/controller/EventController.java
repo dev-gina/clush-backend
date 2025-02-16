@@ -26,7 +26,7 @@ public class EventController {
     }
 
     // 새로운 이벤트 추가하기
-    @PostMapping // 🔥 "/events" 삭제
+    @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event savedEvent = eventService.createEvent(event);
         return ResponseEntity.status(201).body(savedEvent);
