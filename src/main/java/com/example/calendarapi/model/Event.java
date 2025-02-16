@@ -4,7 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.time.LocalDateTime;
+
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 
 @Entity
 public class Event {
@@ -13,17 +15,19 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private String title;
-    private boolean completed;
-    private LocalDateTime date;
+    private String description; // 설명
+    private LocalDate startTime; // 시작 날짜
+    private LocalDate endTime;   // 종료 날짜
+    private String title;        // 제목
+    private Boolean completed;   // 완료 여부 
+    private LocalDate date;      // 날짜
 
+    // 기본 생성자
     public Event() {
     }
 
-    public Event(String description, LocalDateTime startTime, LocalDateTime endTime, String title, boolean completed, LocalDateTime date) {
+    // 매개변수 있는 생성자
+    public Event(String description, LocalDate startTime, LocalDate endTime, String title, Boolean completed, LocalDate date) {
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -32,7 +36,7 @@ public class Event {
         this.date = date;
     }
 
-    // Getters and Setters
+    // Getter & Setter
     public Long getId() {
         return id;
     }
@@ -49,19 +53,19 @@ public class Event {
         this.description = description;
     }
 
-    public LocalDateTime getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
 
@@ -73,19 +77,33 @@ public class Event {
         this.title = title;
     }
 
-    public boolean isCompleted() {
+    public Boolean getCompleted() { 
         return completed;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setCompleted(Boolean completed) { 
         this.completed = completed;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
+
+@Override
+public String toString() {
+    return "Event{" +
+            "id=" + id +
+            ", title='" + new String(title.getBytes(), StandardCharsets.UTF_8) + '\'' +
+            ", description='" + (description != null ? new String(description.getBytes(), StandardCharsets.UTF_8) : "null") + '\'' +
+            ", startTime=" + startTime +
+            ", endTime=" + endTime +
+            ", completed=" + completed +
+            ", date=" + date +
+            '}';
+}
+
 }
