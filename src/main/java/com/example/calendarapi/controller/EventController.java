@@ -4,11 +4,12 @@ import com.example.calendarapi.model.Event;
 import com.example.calendarapi.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/events")
+@CrossOrigin(origins = "http://localhost:5173") 
 public class EventController {
 
     private final EventService eventService;
@@ -28,27 +29,20 @@ public class EventController {
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event savedEvent = eventService.createEvent(event);
-        if (savedEvent != null && savedEvent.getId() != null) {
-            return ResponseEntity.status(201).body(savedEvent);
-        }
-        return ResponseEntity.status(500).body(null);
+        return ResponseEntity.status(201).body(savedEvent);
     }
-
 
     // 이벤트 수정하기
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event eventDetails) {
-        Optional<Event> updatedEvent = eventService.updateEvent(id, eventDetails);
-        return updatedEvent
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(404).build());
+        Event updatedEvent = eventService.updateEvent(id, eventDetails);
+        return ResponseEntity.ok(updatedEvent);
     }
 
     // 이벤트 삭제하기
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
-        return eventService.deleteEvent(id)
-                ? ResponseEntity.noContent().build()
-                : ResponseEntity.status(404).build();
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
     }
 }
